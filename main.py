@@ -1,5 +1,6 @@
 import time
 
+
 def decrypt(cypher_text: str, key: int) -> str:
     message = ""
     for char in cypher_text:
@@ -14,6 +15,7 @@ def decrypt(cypher_text: str, key: int) -> str:
         else:
             message += char
     return message
+
 
 def encrypt(message: str, key: int) -> str:
     cypher_text = ""
@@ -42,15 +44,10 @@ def main() -> None:
         print("e: encrypt, d: decrypt, q: quit, b: break")
         choice = input("> ")
         choice = choice.lower().strip()
-        if len(choice) > 1:
-            print("Your choice should contain one character")
-            print("Try again")
-            print()
-            continue
 
         if choice == "q":
             print("Quiting...")
-            time.sleep(1)
+            input("Press enter to exit")
             break
         elif choice == "e":
             message = get_message()

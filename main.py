@@ -111,6 +111,10 @@ if __name__ == '__main__':
     main()
 
 # Vignere solution
+# Also encrypts lower case chars, which is arguably out of spec.
+# let a and b = 2 arbitrary chars
+# a keyed with b will have the same result as a keyed with upper(b) and a keyed with lower(b)
+
 def next_char(string: str) -> typing.Generator:
     i = 0
     while True:

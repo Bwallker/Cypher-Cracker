@@ -19,7 +19,7 @@ def vignere_encrypt(message: str, key: str) -> str:
             cypher_text += char
             continue
         key_char_offset_from_a: int
-        key_char: str = gen.__next__()
+        key_char: str = next(gen)
         if key_char.islower():
             key_char_offset_from_a = ord(key_char) - 97
         elif key_char.isupper():
@@ -56,7 +56,7 @@ def vignere_decrypt(cypher_text: str, key: str) -> str:
             message += char
             continue
         key_char_offset_from_a: int
-        key_char: str = gen.__next__()
+        key_char: str = next(gen)
         if key_char.islower():
             key_char_offset_from_a = ord(key_char) - 97
         elif key_char.isupper():

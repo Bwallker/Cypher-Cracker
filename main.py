@@ -1,37 +1,47 @@
 import typing
 
 def decrypt(cypher_text: str, key: int) -> str:
-    ASCII_VALUE_OF_CAPITAL_A = 65
+    ASCII_VALUE_OF_UPPER_CASE_A = 65
     ASCII_VALUE_OF_LOWER_CASE_A = 97
     SIZE_OF_ALPHABET = 26
     message = ""
     for char in cypher_text:
         if char.isupper():
             ascii_value = ord(char)
-            new_ascii_value = (ascii_value - key - ASCII_VALUE_OF_CAPITAL_A) % SIZE_OF_ALPHABET + ASCII_VALUE_OF_CAPITAL_A
+            offset_from_a = ascii_value - ASCII_VALUE_OF_UPPER_CASE_A
+            new_offset_from_a = offset_from_a - key
+            new_ascii_value = new_offset_from_a % SIZE_OF_ALPHABET + ASCII_VALUE_OF_UPPER_CASE_A
             message += chr(new_ascii_value)
+
         elif char.islower():
             ascii_value = ord(char)
-            new_ascii_value = (ascii_value - key - ASCII_VALUE_OF_LOWER_CASE_A) % SIZE_OF_ALPHABET + ASCII_VALUE_OF_LOWER_CASE_A
+            offset_from_a = ascii_value - ASCII_VALUE_OF_LOWER_CASE_A
+            new_offset_from_a = offset_from_a - key
+            new_ascii_value = new_offset_from_a % SIZE_OF_ALPHABET + ASCII_VALUE_OF_LOWER_CASE_A
             message += chr(new_ascii_value)
+            
         else:
             message += char
     return message
 
 
 def encrypt(message: str, key: int) -> str:
-    ASCII_VALUE_OF_CAPITAL_A = 65
+    ASCII_VALUE_OF_UPPER_CASE_A = 65
     ASCII_VALUE_OF_LOWER_CASE_A = 97
     SIZE_OF_ALPHABET = 26
     cypher_text = ""
     for char in message:
         if char.isupper():
             ascii_value = ord(char)
-            new_ascii_value = (ascii_value + key - ASCII_VALUE_OF_CAPITAL_A) % SIZE_OF_ALPHABET + ASCII_VALUE_OF_CAPITAL_A
+            offset_from_a = ascii_value - ASCII_VALUE_OF_UPPER_CASE_A
+            new_offset_from_a = offset_from_a + key
+            new_ascii_value = new_offset_from_a % SIZE_OF_ALPHABET + ASCII_VALUE_OF_UPPER_CASE_A
             cypher_text += chr(new_ascii_value)
         elif char.islower():
             ascii_value = ord(char)
-            new_ascii_value = (ascii_value + key - ASCII_VALUE_OF_LOWER_CASE_A) % SIZE_OF_ALPHABET + ASCII_VALUE_OF_LOWER_CASE_A
+            offset_from_a = ascii_value - ASCII_VALUE_OF_LOWER_CASE_A
+            new_offset_from_a = offset_from_a + key
+            new_ascii_value = new_offset_from_a % SIZE_OF_ALPHABET + ASCII_VALUE_OF_LOWER_CASE_A
             cypher_text += chr(new_ascii_value)
         else:
             cypher_text += char
@@ -39,8 +49,9 @@ def encrypt(message: str, key: int) -> str:
 
 
 def break_shift_crypt(cypher_text: str) -> None:
-    for i in range(26):
-        print(decrypt(cypher_text, i+1))
+    print("Output is in format {key}: {decrypted message}")
+    for i in range(1, 27):
+        print(f"{i}: {decrypt(cypher_text, i)}")
 
 
 def main() -> None:
